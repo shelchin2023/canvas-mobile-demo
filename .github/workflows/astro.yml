@@ -35,7 +35,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -61,11 +60,15 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
+      - name: Steup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+        
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
           cache-dependency-path: ${{ env.BUILD_PATH }}/${{ steps.detect-package-manager.outputs.lockfile }}
       - name: Setup Pages
         id: pages
