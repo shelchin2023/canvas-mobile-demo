@@ -1,0 +1,21 @@
+{
+  "servers": [
+    {
+      "name": "public",
+      //"authurl": "https://ace-arenas-login.fusionist.io/login"
+      "authurl": "https://fog-login-test.fusionist.io/login"
+    },
+    {
+      "name": "english",
+      "authurl": "https://fog-login-test.fusionist.io/login"
+    },
+    {
+      "name": "local",
+      "authurl": "http://192.168.31.131:10082/login"
+    },
+	{
+      "name": "localcomputer",
+      "authurl": "http://127.0.0.1:10082/login"
+    }
+  ]
+}
