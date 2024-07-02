@@ -1,18 +1,85 @@
----
-import UnityGame from "@/components/UnityGame.svelte";
----
-
-<html lang="en">
+<!doctype html>
+<html>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Unity game demo</title>
-    <script type="module" crossorigin="true" is:inline src="assets/index-Ddcf6SsI.js"
-    ></script>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="screen-orientation" content="true" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-page-mode" content="app" />
+    <meta name="browsermode" content="application" />
+    <title>giegie</title>
+    <style>
+      .landscape-screen {
+        transform-origin: top left;
+        transform: rotate(90deg) translateY(-100%);
+      }
+
+      iframe:fullscreen {
+        width: 1000px !important;
+        height: 1000px !important;
+        transform: rotate(90deg) translateY(-100%);
+        /* transform: */
+      }
+
+      #Frame {
+        border-style: unset;
+        display: block;
+      }
+    </style>
   </head>
-  <body class="flex justify-center items-center w-screen h-screen">
-    <UnityGame client:only />
+  <body>
+    <iframe id="Frame" style="Frame" src="/unitygame/mobile"></iframe>
+    <script>
+      var Frame = document.getElementById("Frame")!;
+
+      function updateLayout(innerWidth: number, innerHeight: number) {
+        let type = screen.orientation.type;
+
+        // if (document.fullscreenElement) {
+        //   Frame = document.fullscreenElement!;
+        // } else {
+        //   Frame = document.getElementById("Frame")!;
+        // }
+        // console.log({ Frame });
+
+        if (type.startsWith("portrait")) {
+          console.log("portrait", { innerWidth, innerHeight });
+          Frame.style.width = innerHeight + "px";
+          Frame.style.height = innerWidth + "px";
+          Frame.classList.add("landscape-screen");
+        } else {
+          console.log("landscape", { innerWidth, innerHeight });
+          Frame.style.width = innerWidth + "px";
+          Frame.style.height = innerHeight + "px";
+          Frame.classList.remove("landscape-screen");
+        }
+      }
+
+      // Listen to orientation change events
+      screen.orientation.addEventListener("change", (aaa) => {
+        // updateLayout(window.screen.width, window.screen.height);
+        // updateLayout(window.screen.availWidth, window.screen.availHeight);
+        updateLayout(window.innerHeight, window.innerWidth);
+      });
+
+      // Initial setup
+      // updateLayout(window.screen.availWidth, window.screen.availHeight);
+      // updateLayout(window.screen.width, window.screen.height);
+      updateLayout(window.innerWidth, window.innerHeight);
+    </script>
   </body>
 </html>
