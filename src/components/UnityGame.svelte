@@ -10,16 +10,16 @@
 
   onMount(() => {
     const buildUrl = "Build";
-    const loaderUrl = `${buildUrl}/5336a4b2c43054286fd70b1faa467eee.loader.js`;
+    const loaderUrl = buildUrl + "/5336a4b2c43054286fd70b1faa467eee.loader.js";
     const config = {
-      dataUrl: `${buildUrl}/db8f5d3894bec42123c8f21ce055f1e3.data.unityweb`,
-      frameworkUrl: `${buildUrl}/31eca74c7a4b9f51db65ca11f0f25199.framework.js.unityweb`,
-      codeUrl: `${buildUrl}/181c6b3348d9715093b717e874f1729d.wasm.unityweb`,
+      dataUrl: buildUrl + "/a28354c0d56dc50cdf0e1b4674aa0c28.data.unityweb",
+      frameworkUrl:
+        buildUrl + "/d290680de403f76a70a5d655e7766310.framework.js.unityweb",
+      codeUrl: buildUrl + "/f65c4a19c4bb018598c06c220f4fe4a5.wasm.unityweb",
       streamingAssetsUrl: "StreamingAssets",
-      companyName: "IdFame",
+      companyName: "Fusionist",
       productName: "ACE Arenas",
       productVersion: "1.12",
-      showBanner: unityShowBanner,
     };
 
     const script = document.createElement("script");
