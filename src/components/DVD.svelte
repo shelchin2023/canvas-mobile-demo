@@ -5,6 +5,11 @@
 
   let canvas;
 
+  let isFullscreen = false;
+  let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  $:console.log({isMobile})
+
   // 进入全屏
   function enterFullscreen() {
     const fullScreenElement = canvas?.getCanvas();
@@ -17,17 +22,22 @@
 
   // 退出全屏
   function exitFullscreen() {
-    const fullScreenElement = canvas?.getCanvas();
-    if (fullScreenElement) {
+    if (document.fullscreenElement) {
       document.exitFullscreen().catch((err) => {
         alert(`无法退出全屏模式: ${err.message} (${err.name})`);
       });
     }
   }
+
+  $: {
+    isFullscreen = !document.fullscreenElement != null;
+  }
 </script>
 
+<!-- <div class="w-screen h-screen relative"> -->
 <div class="w-[1366px] h-[768px] relative">
   <Canvas autoplay width="1366" height="768" bind:this={canvas}>
+    <!-- <Canvas autoplay width="1366" height="768" bind:this={canvas}> -->
     <Logo />
     <Background />
   </Canvas>
@@ -43,4 +53,10 @@
       进入全屏
     </button>
   </div>
+
+  {#if isFullscreen}
+    <div
+      class="absolute top-0 left-[50%] translate-x-[-50%] bg-white h-1 w-32 rounded-full my-2"
+    ></div>
+  {/if}
 </div>
